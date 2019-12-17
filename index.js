@@ -9,7 +9,7 @@ const app = new Koa()
 const header = fs.readFileSync('./pages/public/header.html', 'utf-8')
 const author = fs.readFileSync('./pages/public/author.html', 'utf-8')
 const stylesheet = fs.readFileSync('./pages/public/stylesheet.html', 'utf-8')
-const context = fs.readFileSync('./pages/mainer/promise.html', 'utf-8')
+const context = fs.readFileSync('./pages/mainer/await.html', 'utf-8')
 const body = `<html><head>${header}${stylesheet}</head><body><div id="wrapper">${author}${context}</div></body></html>`
 
 router.get('/', ctx => {
