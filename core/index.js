@@ -4,6 +4,7 @@ class Index {
     this.header = this.readFileSync('./pages/public/header.html', 'utf-8')
     this.profile = this.readFileSync('./pages/public/author.html', 'utf-8')
     this.stylesheet = [this.readFileSync('./pages/public/stylesheet.html', 'utf-8')]
+    this.footer = []
   }
   readFileSync() {
     return fs.readFileSync(...arguments)
@@ -18,11 +19,17 @@ class Index {
         break
     }
   }
+  foots(name) {
+    this.footer.push(this.readFileSync(`./pages/public/${name}.html`, 'utf-8'))
+  }
   views(name) {
     return this.readFileSync(`./pages/views/${name}.html`, 'utf-8')
   }
   content(body) {
-    return `<html><head>${this.header}${this.stylesheet.join('')}</head><body><div id="wrapper">${this.profile}${body}</div></body></html>`
+    const content = `<html><head>${this.header}${this.stylesheet.join('')}</head><body><div id="wrapper">${this.profile}${body}</div>${this.footer}</body></html>`
+    this.footer = []
+    this.stylesheet = [this.readFileSync('./pages/public/stylesheet.html', 'utf-8')]
+    return content
   }
   response(body) {
     return this.content(body)
