@@ -22,11 +22,14 @@ class Index {
   foots(name) {
     this.footer.push(this.readFileSync(`./pages/public/${name}.html`, 'utf-8'))
   }
+  footView(innerHTML) {
+    this.footer.push(innerHTML)
+  }
   views(name) {
     return this.readFileSync(`./pages/views/${name}.html`, 'utf-8')
   }
   content(body) {
-    const content = `<html><head>${this.header}${this.stylesheet.join('')}</head><body><div id="wrapper">${this.profile}${body}</div>${this.footer}</body></html>`
+    const content = `<html><head>${this.header}${this.stylesheet.join('')}</head><body><div id="wrapper">${this.profile}${body}</div>${this.footer.join('')}</body></html>`
     this.footer = []
     this.stylesheet = [this.readFileSync('./pages/public/stylesheet.html', 'utf-8')]
     return content
