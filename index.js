@@ -6,10 +6,9 @@ const app = new Koa()
 const router = require('./core/router').route
 const { response } = require('./routes/index')
 
-const handler = function(ctx) {
+const handler = function(ctx, method) {
   const url = ctx.req.url
-  const method = path.basename(url).replace('.html', '')
-  ctx.body = response(method)
+  ctx.body = response(method || path.basename(url).replace('.html', ''), Object.values(ctx.params))
 }
 
 app.use(bodyParser())
