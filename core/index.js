@@ -5,6 +5,7 @@ class Index {
     this.profile = this.readFileSync('./pages/public/author.html', 'utf-8')
     this.stylesheet = [this.readFileSync('./pages/public/stylesheet.html', 'utf-8')]
     this.footer = []
+    this.main = []
   }
   readFileSync() {
     return fs.readFileSync(...arguments)
@@ -12,7 +13,7 @@ class Index {
   metas(name, type) {
     switch (type) {
       case 'css':
-        this.stylesheet.push(`<link rel="stylesheet" href="./static/${name}.css" type="text/css" />`)
+        this.stylesheet.push(`<link rel="stylesheet" href="/static/${name}.css" type="text/css" />`)
         break
       case 'profile':
         this.profile = this.readFileSync(`./pages/public/${name}.html`, 'utf-8')
@@ -22,17 +23,25 @@ class Index {
   foots(name) {
     this.footer.push(this.readFileSync(`./pages/public/${name}.html`, 'utf-8'))
   }
+  footView(innerHTML) {
+    this.footer.push(innerHTML)
+  }
+  mainView(innerHTML) {
+    this.main.push(innerHTML)
+  }
   views(name) {
-    return this.readFileSync(`./pages/views/${name}.html`, 'utf-8')
+    const body = this.main.length > 0 ? `<div class="main">${this.main.join('')}</div>` : this.readFileSync(`./pages/views/${name}.html`, 'utf-8')
+    return this.content(body)
   }
   content(body) {
-    const content = `<html><head>${this.header}${this.stylesheet.join('')}</head><body><div id="wrapper">${this.profile}${body}</div>${this.footer}</body></html>`
+    const content = `<html><head>${this.header}${this.stylesheet.join('')}</head><body><div id="wrapper">${this.profile}${body}${this.footer.join('')}</div></body></html>`
     this.footer = []
+    this.main = []
     this.stylesheet = [this.readFileSync('./pages/public/stylesheet.html', 'utf-8')]
     return content
   }
-  response(body) {
-    return this.content(body)
+  response(content) {
+    return content
   }
 }
 

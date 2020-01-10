@@ -1,8 +1,8 @@
 const View = require('./view')
 const view = new View()
-const response = function(method) {
+const response = function(method, params) {
   if (typeof view[method] == 'function') {
-    return view[method]()
+    return view[method](...params)
   } else {
     return view.article(method)
   }
