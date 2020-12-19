@@ -14,7 +14,7 @@ class View extends Parent {
   }
   index(id = 1) {
     const titles = this.selectTitles()
-    const pagination = render.pagination(id - 0, 4, titles.length - 1, '/page/:id')
+    const pagination = render.pagination(id - 0, 4, titles.length, '/page/:id')
     const articleItems = render.articleItems(titles)
     this.metas('index', 'css')
     this.metas('profile', 'profile')

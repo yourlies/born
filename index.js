@@ -14,4 +14,4 @@ const handler = function(ctx, method) {
 app.use(bodyParser())
 app.use(static(path.join(__dirname, 'pages')))
 app.use(...router(handler))
-app.listen(3000)
+app.listen(2333)

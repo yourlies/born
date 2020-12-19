@@ -2,7 +2,7 @@ const pagination = function(current, size, total, path) {
   let links = ''
   const pageNumber = Math.ceil(total / size)
   const newer = `<a id="newer" class="blog-nav" href="${current == 2 ? '/index.html' : path.replace(':id', current - 1)}">NEWER</a>`
-  const older = `<a id="older" class="blog-nav" href="${path.replace(':id', current + 1)}">OLDER&nbsp;&gt;</a>`
+  const older = `<a id="older" class="blog-nav" href="${path.replace(':id', current + 1)}">ELDER&nbsp;&gt;</a>`
   switch (current) {
     case 1:
       links = older
